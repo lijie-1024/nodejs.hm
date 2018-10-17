@@ -1,0 +1,36 @@
+<!-- 导航 -->
+
+<%-include('./layout/header.ejs')%>
+
+<!-- 文章列表 -->
+<div class="list-group">
+  <h3>文章列表</h3>
+  <% artlist.forEach(item => { %>
+    <a href="/article/info/<%= item.id %>" class="list-group-item">
+      <%= item.title %>
+      <span class="badge" style="background-color: #5bc0de;">发表时间：<%= item.ctime %></span>
+      <span class="badge" style="background-color: #f0ad4e;">作者昵称：<%= item.nickname %></span>
+    </a>
+    <% }) %>
+</div>
+<!-- 分页 -->
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+<!-- 下标 -->
+<%-include('./layout/footer.ejs')%>

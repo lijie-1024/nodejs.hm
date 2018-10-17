@@ -1,0 +1,45 @@
+<!-- 导航 -->
+<%-include('../layout/header.ejs')%>
+<link rel="stylesheet" href="/node_modules/mditor/dist/css/mditor.min.css" />
+<script src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+<div class="container">
+    <h1>文章编辑页</h1>
+    <hr>
+    <form id="form">
+        <input type="hidden" name="authorId" value="<%=user.id%>">
+        <input type="hidden" name="id" value="<%= article.id %>">
+        <div class="form-group">
+            <label>文章标题：</label>
+            <input type="text" name="title" class="form-control" value="<%=article.title%>">
+        </div>
+        <div class="form-group">
+            <label>文章内容：</label>
+            <textarea name="content" id="editor"><%=article.content%></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">发表文章</button>
+        </div>
+    </form>
+
+
+</div>
+
+<!-- 下标 -->
+<%-include('../layout/footer.ejs')%>
+<script>
+    var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+    $('#form').submit(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "post",
+            url: "/article/edit",
+            data: $("#form").serialize(),
+            success: function (res) {
+                console.log(res);
+                if (res.status != 200) return alert("发表失败");
+                location.href = '/article/info/<%= article.id %>';
+            }
+        });
+    });
+
+</script>

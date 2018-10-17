@@ -1,0 +1,23 @@
+<!-- 导航 -->
+<%-include('../layout/header.ejs')%>
+<div class="container">
+    <h1 class="text-center">
+        <%=article.title%>
+        <!-- user.id是登陆后填写文章人的id,在数据库blog_users表内id, article.authorId是填写的文章的id,在数据库blog_article表内authorIdid,
+        这个判断是:登陆了并且,登陆账号的人也是写这篇文章人,满足这两个条件才能显示编辑按钮
+        -->
+        <%if(isLogin && user.id == article.authorId){%>
+        <a href="/article/edit/<%=article.id%>" class="btn btn-info pull-right">编辑</a>
+        <%}%>
+
+    </h1>
+
+    <hr>
+
+    <div>
+        <%-article.content%>
+    </div>
+
+</div>
+<!-- 下标 -->
+<%-include('../layout/footer.ejs')%>
